@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏸 羽球箱子賽 - 完整規則海報</title>
+    <style>
+        /* --- 基礎設定與配色 --- */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Oswald:wght@700&display=swap');
+
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --court-green: #2E7D32;
+            --line-white: rgba(255, 255, 255, 0.85);
+            --team-a-blue: #2196F3;
+            --team-b-red: #f44336;
+            --accent-gold: #FFD700;
+            --text-main: #FFFFFF;
+            --primary-color: #4CAF50;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(to right, #001f3f, #003366, #001f3f);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .poster-container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 5px solid #ffd700;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 頂部標題 --- */
+        header {
+            background: transparent;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            font-size: 3.5em;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        header p {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 2em;
+            color: #00bcd4;
+            margin-top: 5px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* --- 內容主網格 --- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            gap: 25px;
+        }
+        
+        /* --- 規則區塊 --- */
+        .rule-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .rule-section h3 {
+            font-size: 1.8em;
+            color: #ff6347;
+            border-bottom: 2px solid #ff6347;
+            padding-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .rule-section ul {
+            padding-left: 25px;
+        }
+
+        .rule-section li {
+            margin-bottom: 10px;
+        }
+
+        .rule-section li strong {
+            color: #ffd700;
+        }
+
+        .highlight { color: #ffd700; font-weight: bold; }
+        .warning { color: #FFFF00; font-weight: 900; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+
+        p, ul, ol {
+            text-align: left;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+        }
+
+        li strong {
+            color: #ffd700;
+        }
+
+        /* --- 場地圖示區 --- */
+        .diagram-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .diagram-section h3.section-title {
+            text-align: center;
+            font-size: 1.8em;
+            color: #ff6347;
+            border-bottom: 2px solid #ff6347;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* [保持與上次相同的球場和箱子 CSS 繪圖] */
+        /* --- 羽球場繪製 (核心) --- */
+        .layouts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .layout-card {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .round-badge {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .court {
+            position: relative;
+            width: 100%;
+            padding-bottom: 50%; /* 2:1 比例 */
+            background-color: var(--court-green);
+            border: 2px solid var(--line-white);
+            margin-bottom: 10px;
+        }
+
+        /* 白線系統 */
+        .line { position: absolute; background-color: var(--line-white); }
+        .line-h { height: 1px; left: 0; right: 0; }
+        .line-v { width: 1px; top: 0; bottom: 0; }
+        
+        .line-singles-top { top: 8%; }
+        .line-singles-bottom { bottom: 8%; }
+        .line-service-back-left { left: 6%; }
+        .line-service-back-right { right: 6%; }
+        .line-service-front-left { left: 35%; }
+        .line-service-front-right { right: 35%; }
+        .line-center-left { top: 50%; left: 0; width: 35%; height: 1px; }
+        .line-center-right { top: 50%; right: 0; width: 35%; height: 1px; }
+
+        /* 網子 */
+        .net {
+            position: absolute; left: 50%; top: -5%; bottom: -5%; width: 3px;
+            background: repeating-linear-gradient(45deg, #ccc 0, #ccc 2px, transparent 2px, transparent 4px);
+            border: 1px solid #fff; transform: translateX(-50%); z-index: 5;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+        }
+
+        /* 箱子樣式 */
+        .box {
+            position: absolute; width: 12%; height: 18%; display: flex;
+            justify-content: center; align-items: center; font-weight: 900;
+            font-size: 0.8rem; border: 2px solid white; z-index: 10;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.5); transform: translate(-50%, -50%);
+        }
+        .box-blue { background-color: var(--team-a-blue); color: white; }
+        .box-red { background-color: var(--team-b-red); color: white; }
+        .direction-arrow {
+            position: absolute; left: 10%; font-size: 1.8rem; pointer-events: none;
+            font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .arrow-blue {
+            top: 35%; transform: translateY(-50%);
+            color: var(--team-a-blue);
+        }
+        .arrow-red {
+            top: 65%; transform: translateY(-50%);
+            color: var(--team-b-red);
+        }
+
+        /* --- 箱子座標設定 (右側場地，部分延伸至場外) --- */
+        .r1-tl { top: 30%; right: 25%; }
+        .r1-tr { top: 30%; right: -4%; }
+        .r1-bl { bottom: 10%; right: 25%; }
+        .r1-br { bottom: 10%; right: -4%; }
+
+        .r2-1 { top: 40%; right: 20%; }
+        .r2-2 { top: 40%; right: -4%; }
+        .r2-3 { bottom: 20%; right: 20%; }
+        .r2-4 { bottom: 20%; right: -4%; }
+
+        .r3-1 { top: 18%; right: -4%; }
+        .r3-2 { top: 39%; right: -4%; }
+        .r3-3 { bottom: 20%; right: -4%; }
+        .r3-4 { bottom: 0%; right: -4%; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+            margin-top: 40px;
+        }
+
+        .legend {
+            display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; font-size: 0.9rem;
+        }
+        .legend span { display: flex; align-items: center; gap: 5px; }
+        .dot { width: 12px; height: 12px; display: inline-block; border: 1px solid #fff; }
+        .dot-blue { background: var(--team-a-blue); }
+        .dot-red { background: var(--team-b-red); }
+
+        /* Back to Home Link */
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-gold);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .back-home:hover {
+            background: var(--accent-gold);
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .back-home span {
+            transition: transform 0.3s ease;
+        }
+
+        .back-home:hover span {
+            transform: translateX(-3px);
+        }
+
+        /* Match Table Section */
+        .match-table-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .match-table-section h3 {
+            font-size: 1.8em;
+            color: #ff6347;
+            border-bottom: 2px solid #ff6347;
+            padding-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .match-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .match-table th,
+        .match-table td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .match-table th {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .match-table td {
+            background: rgba(0, 0, 0, 0.2);
+            color: #e0e0e0;
+        }
+
+        .match-table .round-cell {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .match-table .vs-cell {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .match-table .score-cell {
+            text-align: left;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .match-table .score-line {
+            display: block;
+        }
+
+        .staff-note {
+            margin-top: 15px;
+            padding: 15px 20px;
+            background: rgba(255, 165, 0, 0.1);
+            border-left: 3px solid #ffa500;
+            border-radius: 5px;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .staff-note p {
+            margin: 5px 0;
+            text-align: left;
+        }
+
+        .staff-note strong {
+            color: #ffd700;
+        }
+
+        @media(max-width: 650px) {
+            .layouts-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .match-table {
+                font-size: 0.8rem;
+            }
+            .match-table th,
+            .match-table td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster-container">
+        <a href="index.html" class="back-home"><span>←</span> 返回首頁</a>
+        <header>
+            <h1>🏸 羽球箱子賽</h1>
+            <p>比賽規則與場地配置</p>
+        </header>
+
+        <div class="main-content">
+            
+            <div class="rule-section">
+                <h3>一、 比賽總則</h3>
+                <ul>
+                    <li><strong>參賽隊伍：</strong> 4 隊，每隊 <span class="highlight">4 人</span>。</li>
+                    <li><strong>比賽方式：</strong> <span class="highlight">兩隊同時上場</span>，各自將球打進位於對面場地的指定箱子。</li>
+                    <li><strong>比賽輪數：</strong> 共 <span class="highlight">3 輪</span>，每輪箱子的位置與分數配置都會不同。</li>
+                    <li><strong>箱子配置：</strong> <span class="highlight">共 4 個</span>箱子，皆放置於對面場地，各隊目標 2 個。</li>
+                </ul>
+            </div>
+
+            <div class="rule-section">
+                <h3>二、 比賽流程</h3>
+                <ul>
+                    <li><strong>比賽時間：</strong> <span class="highlight">每輪 1 分鐘</span>。</li>
+                    <li><strong>出手規則：</strong> 每位球員出手 <span class="highlight">1 顆球</span> 後就必須立刻換下一位。</li>
+                    <li><strong>輪替方式：</strong> 出手後的球員需 <span class="highlight">跑回隊伍最後重新排隊領球</span>，準備下一次出手。</li>
+                    <li><strong>持續進行：</strong> 隊伍 4 人會持續輪流循環出手，直到時間結束。</li>
+                </ul>
+            </div>
+
+            <div class="rule-section">
+                <h3>三、 得分計算</h3>
+                <ul>
+                    <li><strong>命中得分：</strong> 將羽球<strong>打進自己隊伍的箱子</strong>即可得分。</li>
+                    <li><strong>分數計算：</strong> 箱子內的羽球數量 × <span class="highlight">箱子分數</span> (1 或 2 分)。</li>
+                    <li><strong>誤擊注意：</strong> 若不小心把球打進<strong>對方的箱子</strong>，該球 <span class="warning">也是算在對方的得分</span>！</li>
+                </ul>
+            </div>
+
+            <div class="rule-section">
+                <h3>四、 輪次設定</h3>
+                <ul>
+                    <li><strong>箱子位置：</strong> 每輪位置不同（可能更遠、更偏角度、不同高度等）。</li>
+                    <li><strong>箱子分數：</strong> 每輪箱子分數不同（第1輪：1-2分，第2輪：1-2分，第3輪：全部2分）。</li>
+                </ul>
+            </div>
+
+            <div class="diagram-section">
+                <h3 class="section-title">五、 場地配置圖</h3>
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.7); margin-bottom: 15px;">4 個箱子都在右側目標區</p>
+                
+                <div class="legend">
+                    <span><i class="dot dot-blue"></i> 藍隊目標箱</span>
+                    <span><i class="dot dot-red"></i> 紅隊目標箱</span>
+                </div>
+
+                <div class="layouts-grid">
+                    
+                    <div class="layout-card">
+                        <span class="round-badge">第一輪</span>
+                        <div class="court">
+                            <div class="line line-h line-singles-top"></div><div class="line line-h line-singles-bottom"></div>
+                            <div class="line line-v line-service-back-left"></div><div class="line line-v line-service-back-right"></div>
+                            <div class="line line-v line-service-front-left"></div><div class="line line-v line-service-front-right"></div>
+                            <div class="line line-center-left"></div><div class="line line-center-right"></div>
+                            <div class="net"></div>
+                            <div class="direction-arrow arrow-blue">➜</div>
+                            <div class="direction-arrow arrow-red">➜</div>
+
+                            <div class="box box-blue r1-tl">1分</div>
+                            <div class="box box-blue r1-tr">2分</div>
+                            <div class="box box-red r1-bl">1分</div>
+                            <div class="box box-red r1-br">2分</div>
+                        </div>
+                        <p style="font-size:0.85rem; color:#ccc;">基礎挑戰：前後場分佈，部分箱子延伸至場外</p>
+                    </div>
+
+                    <div class="layout-card">
+                        <span class="round-badge">第二輪</span>
+                        <div class="court">
+                            <div class="line line-h line-singles-top"></div><div class="line line-h line-singles-bottom"></div>
+                            <div class="line line-v line-service-back-left"></div><div class="line line-v line-service-back-right"></div>
+                            <div class="line line-v line-service-front-left"></div><div class="line line-v line-service-front-right"></div>
+                            <div class="line line-center-left"></div><div class="line line-center-right"></div>
+                            <div class="net"></div>
+                            <div class="direction-arrow arrow-blue">➜</div>
+                            <div class="direction-arrow arrow-red">➜</div>
+
+                            <div class="box box-blue r2-1">1分</div>
+                            <div class="box box-blue r2-2">2分</div>
+                            <div class="box box-red r2-3">1分</div>
+                            <div class="box box-red r2-4">2分</div>
+                        </div>
+                        <p style="font-size:0.85rem; color:#ccc;">中級挑戰：場外延伸位置，1-2分混合配置</p>
+                    </div>
+
+                    <div class="layout-card">
+                        <span class="round-badge">第三輪</span>
+                        <div class="court">
+                            <div class="line line-h line-singles-top"></div><div class="line line-h line-singles-bottom"></div>
+                            <div class="line line-v line-service-back-left"></div><div class="line line-v line-service-back-right"></div>
+                            <div class="line line-v line-service-front-left"></div><div class="line line-v line-service-front-right"></div>
+                            <div class="line line-center-left"></div><div class="line line-center-right"></div>
+                            <div class="net"></div>
+                            <div class="direction-arrow arrow-blue">➜</div>
+                            <div class="direction-arrow arrow-red">➜</div>
+
+                            <div class="box box-blue r3-1">2分</div>
+                            <div class="box box-red r3-2">2分</div>
+                            <div class="box box-blue r3-3">2分</div>
+                            <div class="box box-red r3-4">2分</div>
+                        </div>
+                        <p style="font-size:0.85rem; color:#ccc;">終極挑戰：場外垂直排列，四個箱子全在邊線外</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rule-section">
+                <h3>六、 積分獎勵</h3>
+                <ul>
+                    <li>三輪比賽結束後，依 <span class="highlight">總分排名</span> 獲得積分：</li>
+                    <li><strong>第一名：</strong> <span class="highlight">8 點</span></li>
+                    <li><strong>第二名：</strong> <span class="highlight">6 點</span></li>
+                    <li><strong>第三名：</strong> <span class="highlight">4 點</span></li>
+                    <li><strong>第四名：</strong> <span class="highlight">2 點</span></li>
+                </ul>
+            </div>
+
+            <!-- Match Table Section -->
+            <div class="match-table-section">
+                <h3>七、 對戰組合與工作人員</h3>
+                <table class="match-table">
+                    <thead>
+                        <tr>
+                            <th>輪次</th>
+                            <th>回合</th>
+                            <th>比賽組合</th>
+                            <th>裁判</th>
+                            <th>數球人員</th>
+                            <th>分數</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="round-cell" rowspan="2">一</td>
+                            <td>1</td>
+                            <td class="vs-cell">A vs B</td>
+                            <td>C - 俊杰</td>
+                            <td>D - 翠珊</td>
+                            <td class="score-cell">
+                                <span class="score-line">A：1×[　] + 2×[　] = </span>
+                                <span class="score-line">B：1×[　] + 2×[　] = </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="vs-cell">C vs D</td>
+                            <td>B - 余苹</td>
+                            <td>A - 昀澂</td>
+                            <td class="score-cell">
+                                <span class="score-line">C：1×[　] + 2×[　] = </span>
+                                <span class="score-line">D：1×[　] + 2×[　] = </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="round-cell" rowspan="2">二</td>
+                            <td>1</td>
+                            <td class="vs-cell">A vs B</td>
+                            <td>C - 俊杰</td>
+                            <td>D - 翠珊</td>
+                            <td class="score-cell">
+                                <span class="score-line">A：1×[　] + 2×[　] = </span>
+                                <span class="score-line">B：1×[　] + 2×[　] = </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="vs-cell">C vs D</td>
+                            <td>B - 余苹</td>
+                            <td>A - 昀澂</td>
+                            <td class="score-cell">
+                                <span class="score-line">C：1×[　] + 2×[　] = </span>
+                                <span class="score-line">D：1×[　] + 2×[　] = </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="round-cell" rowspan="2">三</td>
+                            <td>1</td>
+                            <td class="vs-cell">A vs B</td>
+                            <td>C - 俊杰</td>
+                            <td>D - 翠珊</td>
+                            <td class="score-cell">
+                                <span class="score-line">A：2×[　] = </span>
+                                <span class="score-line">B：2×[　] = </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="vs-cell">C vs D</td>
+                            <td>B - 余苹</td>
+                            <td>A - 昀澂</td>
+                            <td class="score-cell">
+                                <span class="score-line">C：2×[　] = </span>
+                                <span class="score-line">D：2×[　] = </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="staff-note">
+                    <p><strong>📌 工作人員職責說明：</strong></p>
+                    <p>• <strong>裁判</strong>：主持比賽、計時、計分</p>
+                    <p>• <strong>數球人員</strong>：在每回合結束後，數箱子內的球數並報出球數給裁判</p>
+                    <p>• <strong>其他人員</strong>：有空的人幫忙撿球</p>
+                    <p style="margin-top: 10px; color: #ffa500;">⚠️ 工作人員會依現場實際情況做調整</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 圖爾思羽球社</p>
+        </footer>
+    </div>
+
+</body>
+</html>

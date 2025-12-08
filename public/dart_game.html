@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羽球飛鏢淘汰賽 - 熱血開打！</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Oswald:wght@700&display=swap');
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(to right, #001f3f, #003366, #001f3f);
+            color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .poster-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 5px solid #ffd700;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5em;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        h2 {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 2em;
+            color: #00bcd4;
+            margin-top: 5px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #ff6347;
+            border-bottom: 2px solid #ff6347;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: #ffd700;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p, ul, ol, table {
+            text-align: left;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+        }
+
+        li strong {
+            color: #ffd700;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .rule-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .rule-section:last-child {
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ff6347;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .score-table td:first-child {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .important-note {
+            background-color: #ff6347;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        /* Back to Home Link */
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffd700;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .back-home:hover {
+            background: #ffd700;
+            color: #001f3f;
+            transform: translateX(-5px);
+        }
+
+        .back-home span {
+            transition: transform 0.3s ease;
+        }
+
+        .back-home:hover span {
+            transform: translateX(-3px);
+        }
+
+        /* Score Diagram */
+        .score-diagram {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .score-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        /* Score Sheet Styles */
+        .staff-table {
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .staff-table th {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            width: 100px;
+        }
+
+        .staff-table td {
+            min-width: 120px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .score-sheet {
+            font-size: 0.9rem;
+        }
+
+        .score-sheet th {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            font-size: 0.85rem;
+        }
+
+        .score-sheet td {
+            background: rgba(0, 0, 0, 0.2);
+            min-height: 30px;
+        }
+
+        .score-sheet .team-cell {
+            background: rgba(255, 99, 71, 0.3);
+            color: #ffd700;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        .score-sheet .team-total {
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        .score-sheet .team-total td {
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        /* RWD - 平板尺寸 */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .poster-container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            .rule-section {
+                overflow-x: auto;
+            }
+        }
+
+        /* RWD - 手機尺寸 */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .poster-container {
+                padding: 15px;
+                border-width: 3px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                letter-spacing: 1px;
+            }
+
+            h2 {
+                font-size: 1.2em;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            h4 {
+                font-size: 1.1em;
+            }
+
+            .rule-section {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 6px 4px;
+            }
+
+            .score-sheet {
+                font-size: 0.7rem;
+            }
+
+            .score-sheet th {
+                font-size: 0.7rem;
+            }
+
+            .back-home {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            .important-note {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <a href="index.html" class="back-home"><span>←</span> 返回首頁</a>
+        <h1>🏆 熱血開打！羽球飛鏢淘汰賽 🎯</h1>
+        <h2>策略與技巧的終極對決！</h2>
+
+        <div class="rule-section">
+            <h3>一、 比賽總則</h3>
+            <ul>
+                <li><strong>參賽隊伍：</strong> 4 隊，每隊 4 人。</li>
+                <li><strong>目標分數：</strong> 每隊起始分數為 <span class="highlight">400 分</span>。</li>
+                <li><strong>獲勝條件：</strong> 隊伍分數最先降至 <span class="highlight">0 分 (Checkout)</span> 即刻獲勝。</li>
+            </ul>
+        </div>
+
+        <div class="rule-section">
+            <h3>二、 比賽用具與計分方式</h3>
+            <ul>
+                <li><strong>球具：</strong> <span class="highlight">羽毛球、羽球拍</span>。</li>
+                <li><strong>擊中扣分：</strong> 成功擊中目標區，分數將從隊伍總分中扣除。</li>
+                <li><strong>壓線規則：</strong> 若羽毛球落在兩分數線之間，以 <span class="highlight">分數較低</span> 的區域計分。</li>
+                <li><strong>界外或未擊中：</strong> 計 <span class="highlight">0 分</span>。</li>
+            </ul>
+            <div class="score-diagram">
+                <img src="badminton_dart.png" alt="羽球飛鏢賽場地分數圖示">
+            </div>
+        </div>
+
+        <div class="rule-section">
+            <h3>三、 賽前準備與流程</h3>
+            <ul>
+                <li><strong>上場順序：</strong> 各隊請自行決定隊員上場順序（1 號至 4 號）。</li>
+                <li><strong>試打時間：</strong> 正式開賽前，<span class="highlight">所有隊伍共同享有 5 分鐘熱身試打時間</span>。</li>
+                <li><strong>開賽順序：</strong> 各隊派出一人<span class="highlight">猜拳</span>決定回合擊球順序。先攻隊伍具有較大優勢，因為有機會先 checkout。</li>
+                <li><strong>每輪流程：</strong> 各隊 1 號依序擊球，可擊球兩顆，各隊 1 號隊員完成後為一輪，第二輪為各隊 2 號，依序擊球，依此類推。</li>
+                <li><strong>放棄擊球：</strong> 各隊員可選擇 <span class="highlight">放棄擊球</span>，保留當前分數不進行扣分。</li>
+                <li><strong>成績公布：</strong> 每輪結束後，將<span class="highlight">公佈各隊最新分數</span>！</li>
+            </ul>
+        </div>
+
+        <div class="rule-section">
+            <h3>四、 勝負判定與特殊規則</h3>
+            <ul>
+                <li><strong>即時獲勝 (Checkout)：</strong> 隊伍分數<strong>恰好</strong>降至 <span class="highlight">0 分</span>，立即勝出！</li>
+                <li><strong>Bust (爆分/出局)：</strong> 若擊球後分數降至 <span class="highlight">負分</span>，該隊伍立即<span class="highlight">出局</span>，停止後續擊球。</li>
+                <li><strong>最大輪數：</strong> 最多進行 <span class="highlight">八輪</span>。若八輪後無隊伍 Checkout，則強制結算成績。</li>
+            </ul>
+        </div>
+
+        <div class="rule-section">
+            <h3>五、 積分計算與獎勵</h3>
+            <h4>🌟 情況一：有隊伍 Checkout (成功降至 0 分)</h4>
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th>隊伍狀態</th>
+                        <th>判定條件</th>
+                        <th>積分</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Checkout 隊伍</strong></td>
+                        <td>成功 Checkout (分數降至 0)</td>
+                        <td><span class="highlight">10 點</span></td>
+                    </tr>
+                    <tr>
+                        <td>未 Bust 第一名</td>
+                        <td>剩餘分數最接近 0 分</td>
+                        <td>4 點</td>
+                    </tr>
+                    <tr>
+                        <td>未 Bust 第二名</td>
+                        <td>剩餘分數次接近 0 分</td>
+                        <td>3 點</td>
+                    </tr>
+                    <tr>
+                        <td>未 Bust 第三名</td>
+                        <td>剩餘分數第三接近 0 分</td>
+                        <td>2 點</td>
+                    </tr>
+                    <tr>
+                        <td>Bust 隊伍</td>
+                        <td>分數低於 0 分</td>
+                        <td>0 點</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px; color: #ffd700; font-weight: bold; text-align: center;">
+                ⚠️ 注意：分數相同的隊伍，取得相同積分
+            </p>
+
+            <h4>🌟 情況二：強制結算 (八輪結束仍無 Checkout)</h4>
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th>名次</th>
+                        <th>判定條件</th>
+                        <th>積分</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>第一名</td>
+                        <td>剩餘分數最接近 0 分</td>
+                        <td>4 點</td>
+                    </tr>
+                    <tr>
+                        <td>第二名</td>
+                        <td>剩餘分數次接近 0 分</td>
+                        <td>3 點</td>
+                    </tr>
+                    <tr>
+                        <td>第三名</td>
+                        <td>剩餘分數第三接近 0 分</td>
+                        <td>2 點</td>
+                    </tr>
+                    <tr>
+                        <td>第四名</td>
+                        <td>剩餘分數第四接近 0 分</td>
+                        <td>1 點</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bust</strong></td>
+                        <td>分數低於 0 分者，排在未 Bust 隊伍之後，依剩餘分數排名</td>
+                        <td>0 點</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px; color: #ffd700; font-weight: bold; text-align: center;">
+                ⚠️ 注意：若強制結算時，分數相同的隊伍，取得相同積分
+            </p>
+        </div>
+
+        <div class="rule-section">
+            <h3>六、 總賽制</h3>
+            <ul>
+                <li>比賽將進行 <span class="highlight">兩次</span> (Game 1、Game 2)。</li>
+                <li><span class="highlight">一個場次得一次積分</span>，兩個場次所以共有 <span class="highlight">兩個取得積分的機會</span>。</li>
+            </ul>
+        </div>
+
+        <div class="rule-section">
+            <h3>七、 計分表範例</h3>
+            <p style="color: #ffa500; margin-bottom: 15px;">📋 以下為單輪計分表範例（第 1 輪 = 各隊 1 號選手擊球），正式比賽最多進行 8 輪</p>
+            <p style="color: #00bcd4; margin-bottom: 15px;">
+                ⚠️ 表格中 A、B、C、D 隊順序僅為範例，<strong>實際擊球順序由猜拳決定</strong>
+            </p>
+            
+            <h4>📌 工作人員職責</h4>
+            <ul>
+                <li><strong>裁判</strong>：主持比賽、判定羽球落地分數</li>
+                <li><strong>計分人員</strong>：聽從裁判報出的結果，記錄各隊分數</li>
+            </ul>
+            
+            <table class="staff-table">
+                <tr><th>計分人員</th><td></td><th>裁判</th><td></td></tr>
+            </table>
+            
+            <h4 style="text-align: center; margin: 20px 0 10px;">第 1 輪（各隊 1 號選手）</h4>
+            <table class="score-sheet">
+                <thead>
+                    <tr>
+                        <th>隊伍</th>
+                        <th>選手</th>
+                        <th>第 1 球</th>
+                        <th>第 2 球</th>
+                        <th>本輪得分</th>
+                        <th>起始分數</th>
+                        <th>本輪結算</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="team-cell">A 隊</td><td>A1</td><td></td><td></td><td></td><td>400</td><td></td></tr>
+                    <tr><td class="team-cell">B 隊</td><td>B1</td><td></td><td></td><td></td><td>400</td><td></td></tr>
+                    <tr><td class="team-cell">C 隊</td><td>C1</td><td></td><td></td><td></td><td>400</td><td></td></tr>
+                    <tr><td class="team-cell">D 隊</td><td>D1</td><td></td><td></td><td></td><td>400</td><td></td></tr>
+                </tbody>
+            </table>
+            <p style="color: #aaa; font-size: 0.85rem; margin-top: 10px; text-align: center;">
+                第 2 輪 → 各隊 2 號選手、第 3 輪 → 各隊 3 號選手...依此類推
+            </p>
+        </div>
+
+        <p class="important-note">揮灑汗水，精準擊球！期待您的參與！</p>
+
+        <div class="footer">
+            <p>&copy; 圖爾思羽球社</p>
+        </div>
+    </div>
+</body>
+</html>
